@@ -262,4 +262,58 @@ Product product, boolean suitableForComposting) {
 		
 		return info;
 	}
+
+	public String listResiduesByNoxiousness() {
+		String list = "";
+		Recyclable y;
+		Biodegradable z;
+		
+		double ordenedNoxiousness[] = new double[1000];
+		
+		for (int i=0;i<waste.length && waste[i]!=null; i++) {
+			if(waste[i] instanceof Recyclable) {
+				y = (Recyclable)waste[i];
+				ordenedNoxiousness[i]=y.calcNoxiousness();
+			}
+			else if (waste[i] instanceof Biodegradable) {
+				z = (Biodegradable)waste[i];
+				ordenedNoxiousness[i]=z.calcNoxiousness();
+			}
+			else 
+				ordenedNoxiousness[i]=waste[i].calcNoxiousness();			
+		}
+		
+		int a = 0;
+		double b = 0;
+		for (int i=0; i<ordenedNoxiousness.length && ordenedNoxiousness[i] != 0 ;i++) {
+			a = i;
+			for(int j=i+1; j<=ordenedNoxiousness.length;j++) {
+				if (ordenedNoxiousness[j] > ordenedNoxiousness[a]) {
+					a = j;
+				}
+			b = ordenedNoxiousness[i];
+			ordenedNoxiousness[i] = ordenedNoxiousness[a];
+			ordenedNoxiousness[a] = b;
+			}
+		}
+		
+		for (int i=0; i<ordenedNoxiousness.length && ordenedNoxiousness[i]!=0;i++) {
+			for(int j=0; j<waste.length && waste[i]!=null;j++)
+				if (((Recyclable)waste[j]).calcNoxiousness()==ordenedNoxiousness[i]) 
+					list += waste[j].getName();
+				
+				else if (((Biodegradable)waste[j]).calcNoxiousness()==ordenedNoxiousness[i]) 
+					list += waste[j].getName();
+				
+				else if (waste[j].calcNoxiousness()== ordenedNoxiousness[i])
+					list += waste[j].getName();
+					
+					
+		}
+		
+		
+		return list;
+		
+	}
+
 }
