@@ -141,23 +141,125 @@ Product product, boolean suitableForComposting) {
 		boolean stop = false;
 		
 		for (int i=0; !stop && i<waste.length;i++) {
-			if (waste[i].getName().equalsIgnoreCase(name)) {
-				if (waste[i] instanceof Inert) {
-					x = (Inert)waste[i];
-					info = "\n"+ x.toString() + "\n";
+			if (waste[i] != null) {
+				if (waste[i].getName().equalsIgnoreCase(name)) {
+					if (waste[i] instanceof Inert) {
+						x = (Inert)waste[i];
+						info = "\n"+ x.toString() + "\n";
+					}
+					else if (waste[i] instanceof Recyclable) {
+						y = (Recyclable)waste[i];
+						info = "\n" + y.toString() + "\n";
+					}
+					else if (waste[i] instanceof Biodegradable) {
+						z = (Biodegradable)waste[i];
+						info = "\n" + z.toString() + "\n";
+					}
+					stop = true;
 				}
-				else if (waste[i] instanceof Recyclable) {
-					y = (Recyclable)waste[i];
-					info = "\n" + y.toString() + "\n";
-				}
-				else if (waste[i] instanceof Biodegradable) {
-					z = (Biodegradable)waste[i];
-					info = "\n" + z.toString() + "\n";
-				}
-				stop = true;
-			}	
+			}
 		}
 		return info;
 	}
+	
+	public String searchInfoWasteById(String id) {
 
+		String info = "\n Not found \n";
+		
+		Inert x;
+		Recyclable y;
+		Biodegradable z;
+		
+		boolean stop = false;
+		
+		for (int i=0; !stop && i<waste.length;i++) {
+			if (waste[i] != null) {
+				if (waste[i].getName().equalsIgnoreCase(id)) {
+					if (waste[i] instanceof Inert) {
+						x = (Inert)waste[i];
+						info = "\n"+ x.toString() + "\n";
+					}
+					else if (waste[i] instanceof Recyclable) {
+						y = (Recyclable)waste[i];
+						info = "\n" + y.toString() + "\n";
+					}
+					else if (waste[i] instanceof Biodegradable) {
+						z = (Biodegradable)waste[i];
+						info = "\n" + z.toString() + "\n";
+					}
+					stop = true;
+				}
+			}
+		}
+		return info;
+	
+	}
+
+	public String showListOfProducts() {
+		String list = "";
+			
+		for (int i=0; i<products.length && products[i]!=null; i++) 
+				list += "\n		" + products[i].getName();
+			
+		return list;
+	}
+
+	public double calculateHarmfulEffectOnPlanetOfResidue(String id) {
+		double noxiousness = 0;
+		
+		Recyclable y;
+		Biodegradable z;
+		
+		boolean stop = false;
+		
+		for (int i=0; !stop && i<waste.length;i++) {
+			if (waste[i] != null) {
+				if (waste[i].getName().equalsIgnoreCase(id)) {
+					if (waste[i] instanceof Recyclable) {
+						y = (Recyclable)waste[i];
+						noxiousness = y.calcNoxiousness();
+					}
+					else if (waste[i] instanceof Biodegradable) {
+						z = (Biodegradable)waste[i];
+						noxiousness = z.calcNoxiousness();
+					}
+					else 
+						noxiousness = waste[i].calcNoxiousness();
+					stop = true;
+				}
+			}
+		}
+		return noxiousness;
+	}
+
+	public String isThisResidueUsable(String id){
+		String info = "\n This product may be inert, does not exists or is not usable \n";
+		boolean usable = false;
+	
+		Recyclable y;
+		Biodegradable z;
+		
+		boolean stop = false;
+		
+		for (int i=0; !stop && i<waste.length; i++) {
+			if (waste[i] != null) {
+				if (waste[i].getId().equalsIgnoreCase(id)) {
+					
+					if (waste[i] instanceof Recyclable) {
+						y = (Recyclable)waste[i];
+						usable = y.isUsable();
+					}
+					else if (waste[i] instanceof Biodegradable) {
+						z = (Biodegradable)waste[i];
+						usable = z.isUsable();
+					}
+					stop = true;
+				}
+			}
+		}
+		if (usable)
+			info = "The residue is usable";
+		
+		return info;
+	}
 }
