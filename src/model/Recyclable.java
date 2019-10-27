@@ -68,5 +68,4 @@ public class Recyclable extends Residue implements Usable{
 
 		return usable;
 	}
-
 }

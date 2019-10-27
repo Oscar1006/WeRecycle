@@ -9,14 +9,14 @@ public class Product {
 	private String description;
 
 //RELATIONSHIP
-	private Residue waste[];
+	private Residue miniWaste[];
 
 	public Product(String id, String name, String description, Residue waste) {
 
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.waste = new Residue [100];
+		this.miniWaste = new Residue [100];
 	}
 
 	public String getId() {
@@ -32,7 +32,7 @@ public class Product {
 	}
 
 	public Residue getWaste(int i) {
-		return waste[i];
+		return miniWaste[i];
 	}
 
 }

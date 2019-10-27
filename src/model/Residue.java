@@ -85,5 +85,4 @@ public abstract class Residue {
 		return "		Residue \n id: " + id + "\n name: " + name + "\n source: " + source + "\n color: " + color
 				+ "\n decompositionTime: " + decompositionTime + "\n product:" + product + "\n";
 	}
-		
 }

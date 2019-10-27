@@ -55,5 +55,5 @@ public class Biodegradable extends Residue implements Usable {
 
 		return usable;
 
-	}//Comentario de prueba
+	}
 }

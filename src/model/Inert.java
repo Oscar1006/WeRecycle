@@ -19,5 +19,5 @@ public class Inert extends Residue {
 	public String toString() {
 		return super.toString() + "\n	Inert\n adviceToReduce: " + adviceToReduce + "\n" ;
 	}
-	//xD
+	
 }

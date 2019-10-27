@@ -75,7 +75,26 @@ public class WeRecycle {
 		
 		return info;
 	}
-
+	
+	public String addProduct(String id, String name, String description, Residue waste) {
+		String info = "";
+		boolean added = false;
+		Product x = new Product(id, name, description, waste);
+		
+		for(int i=0; i<products.length && !added; i++) {
+			if (products[i] == null) {
+				products[i] = x;
+				added = true;
+			}
+		}
+		
+		if (added)
+			info = "Product added";
+		else
+			info = "Error";
+		
+		return info;
+	}
 
 
 }
