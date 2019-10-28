@@ -1,6 +1,7 @@
 package ui;
 
 import model.Recyclable;
+import model.Product;
 import model.WeRecycle;
 import java.util.Scanner;
 
@@ -10,14 +11,12 @@ public class Company {
 	
 	private Scanner inputString;
 	private Scanner inputInt;
-	private Scanner inputDouble;
 	
 	public Company() {
 		weRecycle = new WeRecycle();
 		
 		inputString = new Scanner(System.in);
 		inputInt = new Scanner(System.in);
-		inputDouble = new Scanner(System.in);
 	}
 	
 	public static void main(String[] args) {
@@ -92,8 +91,10 @@ public class Company {
 		String description = "";
 		boolean suitableForComposting = false;
 		
-		Product x = null;
+		Product x;
 		String idProduct = "";
+		String nameProduct = "";
+		String descriptionProduct = "";
 		
 		System.out.println("Choose the category of the residue:\n "
 				+ "1.Inert\n"
@@ -120,7 +121,13 @@ public class Company {
 			x = weRecycle.searchProduct(idProduct);
 		}
 		else {
-			System.out.print
+			System.out.println("	Create a new product\n - Enter id of product: ");
+			idProduct = inputString.nextLine();
+			System.out.println(" - Enter the name of the product: ");
+			nameProduct = inputString.nextLine();
+			System.out.println(" - Enter a description: ");
+			descriptionProduct = inputString.nextLine();
+			x = weRecycle.createProduct(idProduct, nameProduct, descriptionProduct);
 		}
 			
 				
@@ -128,9 +135,9 @@ public class Company {
 			case 1:
 				System.out.println("Enter an advice to reduce this residue\n");
 				adviceToReduce = inputString.nextLine();
-				info = addWaste(id, name, source, color, decompositionTime, x, adviceToReduce);
+				info = weRecycle.addWaste(id, name, source, color, decompositionTime, x, adviceToReduce);
 					break;
-			case 2:
+			case 2: 
 				System.out.println("Choose its type:\n"
 						+ " 1.Paper\n"
 						+ " 2.Paperboard\n"
@@ -157,29 +164,34 @@ public class Company {
 				}
 				System.out.println("Enter a description of this residue\n");
 				description = inputString.nextLine();
+				info = weRecycle.addWaste(id, name, source, color, decompositionTime, x, type, description);
+					break;
 			case 3:
 				System.out.println("Is this residue suitable for composting?\n 1.Yes\n 2.Not");
 				pick = inputInt.nextInt();
 				if (pick == 1)
 					suitableForComposting = true;
+				info = weRecycle.addWaste(id, name, source, color, decompositionTime, x, suitableForComposting);
 			}
+		System.out.println(info);
 	}
 	
 	
 
 	private void generateReport() {
-			
+		String info = weRecycle.generateReportOfWaste();
+		System.out.println(info); 	
 	}
 
 	private void addProduct() {
 			
 	}
 
-	private void searchInfoByName() {
+	private void searchInfoByName(String name) {
 			
 	}
 
-	private void showListOfProducts() {
+	private void showListOfProducts(Strinf id) {
 			
 	}
 

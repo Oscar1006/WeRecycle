@@ -11,7 +11,7 @@ public class Product {
 //RELATIONSHIP
 	private Residue miniWaste[];
 
-	public Product(String id, String name, String description, Residue waste) {
+	public Product(String id, String name, String description) {
 
 		this.id = id;
 		this.name = name;

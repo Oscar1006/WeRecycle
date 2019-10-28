@@ -77,10 +77,10 @@ Product product, boolean suitableForComposting) {
 		return info;
 	}
 	
-	public String addProduct(String id, String name, String description, Residue waste) {
+	public String addProduct(String id, String name, String description) {
 		String info = "";
 		boolean added = false;
-		Product x = new Product(id, name, description, waste);
+		Product x = new Product(id, name, description);
 		
 		for(int i=0; i<products.length && !added; i++) {
 			if (products[i] == null) {
@@ -328,4 +328,10 @@ Product product, boolean suitableForComposting) {
 		
 		return x;
 	}
+
+	public Product createProduct(String id, String name, String descrition) {
+		Product x = new Product(id, name, descrition);
+		return x;
+	}
+
 }
