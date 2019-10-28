@@ -84,63 +84,82 @@ public class Company {
 	}
 
 	private void addResidue() {
-	System.out.println("Choose the category of the residue:\n "
-			+ "1.Inert\n"
-			+ "2.Recyclable\n"
-			+ "3.Biodegradable\n");	
-	int category = inputInt.nextInt();
-	System.out.println("Enter the id of the residue: ");
-	String id = inputString.nextLine();
-	System.out.println("Enter the name of the residue: ");
-	String name = inputString.nextLine();
-	System.out.println("Enter the source of the residue: ");
-	String source = inputString.nextLine();
-	System.out.println("Enter the color of the residue: ");
-	String color = inputString.nextLine();
-	System.out.println("Enter the decomposition time of the residue (days): ");
-	int decompositionTime = inputInt.nextInt();
-	
-	String adviceToReduce = "";
-	int nType = 0;
-	String type ="";
-	String description = "";
-	boolean suitableForComposting = false;
-	
-	switch (category) {
-		case 1:
-			System.out.println("Enter an advice to reduce this residue\n");
-			adviceToReduce = inputString.nextLine(); 
-				break;
-		case 2:
-			System.out.println("Choose its type:\n"
-					+ " 1.Paper\n"
-					+ " 2.Paperboard\n"
-					+ " 3.Glass\n"
-					+ "	4.Plastic\n"
-					+ " 5.Metal\n");
-			nType = inputInt.nextInt();
-			switch(nType) {
-				case 1:
-					type = Recyclable.PAPER;
-						break;
-				case 2:
-					type = Recyclable.PAPERBOARD;
-						break;
-				case 3:
-					type = Recyclable.GLASS;
-						break;
-				case 4:
-					type = Recyclable.PLASTIC;
-						break;
-				case 5: 
-					type = Recyclable.METAL;
-						break;
-			}
-			System.out.println("Enter a description of this residue\n");
-			description = inputString.nextLine();
-		case 3:
-			
+		String info = "";
+		
+		String adviceToReduce = "";
+		int pick = 0;
+		String type ="";
+		String description = "";
+		boolean suitableForComposting = false;
+		
+		Product x;
+		String idProduct = "";
+		
+		System.out.println("Choose the category of the residue:\n "
+				+ "1.Inert\n"
+				+ "2.Recyclable\n"
+				+ "3.Biodegradable\n");	
+		int category = inputInt.nextInt();
+		System.out.println("Enter the id of the residue: ");
+		String id = inputString.nextLine();
+		System.out.println("Enter the name of the residue: ");
+		String name = inputString.nextLine();
+		System.out.println("Enter the source of the residue: ");
+		String source = inputString.nextLine();
+		System.out.println("Enter the color of the residue: ");
+		String color = inputString.nextLine();
+		System.out.println("Enter the decomposition time of the residue (days): ");
+		int decompositionTime = inputInt.nextInt();
+		
+		System.out.println("Asociated product\n"
+				+ " Does it alredy exists the product in the data base?\n   1.Yes\n   2.No\n");
+		pick = inputString.nextInt();
+		if (pick==1) {
+			System.out.println("Enter the id of the product: ");
+			idProduct = inputString.nextLine();
+			x = weRecycle.searchProduct(idProduct);
 		}
+			
+				
+		switch (category) {
+			case 1:
+				System.out.println("Enter an advice to reduce this residue\n");
+				adviceToReduce = inputString.nextLine();
+				info = addWaste(id, name, source, color, decompositionTime, product, adviceToReduce);
+					break;
+			case 2:
+				System.out.println("Choose its type:\n"
+						+ " 1.Paper\n"
+						+ " 2.Paperboard\n"
+						+ " 3.Glass\n"
+						+ "	4.Plastic\n"
+						+ " 5.Metal\n");
+				pick = inputInt.nextInt();
+				switch(pick) {
+					case 1:
+						type = Recyclable.PAPER;
+							break;
+					case 2:
+						type = Recyclable.PAPERBOARD;
+							break;
+					case 3:
+						type = Recyclable.GLASS;
+							break;
+					case 4:
+						type = Recyclable.PLASTIC;
+							break;
+					case 5: 
+						type = Recyclable.METAL;
+							break;
+				}
+				System.out.println("Enter a description of this residue\n");
+				description = inputString.nextLine();
+			case 3:
+				System.out.println("Is this residue suitable for composting?\n 1.Yes\n 2.Not");
+				pick = inputInt.nextInt();
+				if (pick == 1)
+					suitableForComposting = true;
+			}
 	}
 	
 	
