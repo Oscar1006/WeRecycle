@@ -52,16 +52,22 @@ public class Company {
 						recycler.addProduct();
 					break;
 				case 4:
-						recycler.searchInfoByName();
+						System.out.println(" Enter the name of the residue:");
+						String name = recycler.inputString.nextLine();
+						recycler.searchInfoByName(name);
 					break;
 				case 5:
-						recycler.searchInfoByName();	
+						System.out.println(" Enter the id of the residue:");
+						String id = recycler.inputString.nextLine();
+						recycler.searchInfoById(id);	
 					break;
 				case 6:
 						recycler.showListOfProducts();
 					break;
 				case 7:
-						recycler.calculateHarmfulEffect();
+						System.out.println("Enter the id of the residue you want to calculate");
+						String idToCalculate = recycler.inputString.nextLine();
+						recycler.calculateHarmfulEffect(idToCalculate);
 					break;
 				case 8:
 						recycler.detrmineUsability();
@@ -81,6 +87,7 @@ public class Company {
 			}
 		}
 	}
+
 
 	private void addResidue() {
 		String info = "";
@@ -184,19 +191,34 @@ public class Company {
 	}
 
 	private void addProduct() {
-			
+		System.out.println(" - Enter the id of the product: ");
+		String id = inputString.nextLine();
+		System.out.println(" - Enter the name of the product: ");
+		String name = inputString.nextLine();
+		System.out.println(" - Enter a description: ");
+		String description = inputString.nextLine();
+		String info = weRecycle.addProduct(id, name, description);
+		System.out.println(info);
 	}
 
 	private void searchInfoByName(String name) {
-			
+		String info = weRecycle.searchInfoWasteByName(name);
+		System.out.println(info);
+	}
+	
+	private void searchInfoById(String id) {		
+		String info = weRecycle.searchInfoWasteById(id);
+		System.out.println(info);
+		}
+
+	private void showListOfProducts() {
+		String info = weRecycle.showListOfProducts();
+		System.out.println(info);	
 	}
 
-	private void showListOfProducts(Strinf id) {
-			
-	}
-
-	private void calculateHarmfulEffect() {
-			
+	private void calculateHarmfulEffect(String id) {
+		String info = weRecycle.calculateHarmfulEffectOnPlanetOfResidue(id);
+		System.out.println(info);
 	}
 
 	private void detrmineUsability() {
