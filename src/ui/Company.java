@@ -92,7 +92,7 @@ public class Company {
 		String description = "";
 		boolean suitableForComposting = false;
 		
-		Product x;
+		Product x = null;
 		String idProduct = "";
 		
 		System.out.println("Choose the category of the residue:\n "
@@ -119,13 +119,16 @@ public class Company {
 			idProduct = inputString.nextLine();
 			x = weRecycle.searchProduct(idProduct);
 		}
+		else {
+			System.out.print
+		}
 			
 				
 		switch (category) {
 			case 1:
 				System.out.println("Enter an advice to reduce this residue\n");
 				adviceToReduce = inputString.nextLine();
-				info = addWaste(id, name, source, color, decompositionTime, product, adviceToReduce);
+				info = addWaste(id, name, source, color, decompositionTime, x, adviceToReduce);
 					break;
 			case 2:
 				System.out.println("Choose its type:\n"

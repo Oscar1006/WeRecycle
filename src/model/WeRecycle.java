@@ -316,4 +316,16 @@ Product product, boolean suitableForComposting) {
 		
 	}
 
+	public Product searchProduct(String id) {
+		Product x = null;
+		boolean stop = false;
+		for (int i=0;i<products.length && !stop;i++) {
+			if(products[i].getId().equalsIgnoreCase(id)) {
+				x = products[i];
+				stop = true;
+			}
+		}
+		
+		return x;
+	}
 }
