@@ -34,8 +34,7 @@ public class Company {
 				+ " 7.Calculate harmful effect of a residue\n"
 				+ " 8.Determine if a biodegradable or recyclable residue is usable\n"
 				+ " 9.Ordenate all the residues by their nocive effect, showing the most nocive first\n"
-				+ " 10.Ordenate the residues of a product by their nocive effect, showing the most nocive first\n"
-				+ " 11.Exit\n");
+				+ " 10.Exit\n");
 		
 		while(loop) {
 			System.out.println("Please enter a number to choose an option of the menu\n");
@@ -70,15 +69,15 @@ public class Company {
 						recycler.calculateHarmfulEffect(idToCalculate);
 					break;
 				case 8:
-						recycler.detrmineUsability();
+					System.out.println("Enter the id of the residue you want to know if its usable");
+					String idToDetermine = recycler.inputString.nextLine();
+						recycler.detrmineUsability(idToDetermine);
 					break;
 				case 9:
 						recycler.ordenateAllResiduesNoxiousness();
 					break;
+					
 				case 10:
-						recycler.odenateResiduesOfAProductNoxiousness();
-					break;
-				case 11:
 					loop = false;
 					break;
 				default:
@@ -217,20 +216,19 @@ public class Company {
 	}
 
 	private void calculateHarmfulEffect(String id) {
-		String info = weRecycle.calculateHarmfulEffectOnPlanetOfResidue(id);
+		double info = weRecycle.calculateHarmfulEffectOnPlanetOfResidue(id);
+		System.out.println("Its harmful effect on the planet is: "+info);
+	}
+
+	private void detrmineUsability(String id)  {
+		String info = weRecycle.isThisResidueUsable(id);
 		System.out.println(info);
 	}
 
-	private void detrmineUsability() {
-			
-	}
-
 	private void ordenateAllResiduesNoxiousness() {
-			
+		String info = weRecycle.listResiduesByNoxiousness();
+		System.out.println(info);
 	}
 
-	private void odenateResiduesOfAProductNoxiousness() {
-			
-	}
 
 }
